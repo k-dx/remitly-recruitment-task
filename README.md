@@ -16,5 +16,12 @@ docker compose -f docker-compose.prod.yml build
 ```
 
 2. Run:
+```
 docker compose -f docker-compose.prod.yml up -d
+```
+
+### Unit tests
+
+```
+docker compose -f docker-compose.test.yml up --build
 ```

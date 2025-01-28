@@ -31,7 +31,5 @@ COPY --from=build /app/dist ./dist
 # Expose the port for the API
 EXPOSE 8080
 
-ENV NODE_PATH=./dist
-
 # Start the application
 CMD ["npm", "run", "start"]

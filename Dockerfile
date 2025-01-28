@@ -17,6 +17,4 @@ RUN npm run build
 # Expose the port for the API
 EXPOSE 3000
 
-ENV NODE_PATH=./dist
-
 CMD ["npm", "run", "dev"]
