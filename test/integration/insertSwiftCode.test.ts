@@ -14,7 +14,6 @@ describe("POST /v1/swift-codes", () => {
     sinon.restore();
     await pool.query("DELETE FROM swift_codes");
     await pool.query("DELETE FROM countries_iso2");
-    pool.end();
   });
 
   it("should successfully insert a new SWIFT code", async () => {
