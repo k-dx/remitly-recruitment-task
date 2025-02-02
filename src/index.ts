@@ -1,8 +1,8 @@
-import express, { RequestHandler } from "express";
+import express from "express";
 import { Request, Response } from "express";
 import dotenv from "dotenv";
 import { validatePostPayload } from "./middleware/validatePostPayload.js";
-// import { Pool } from "pg";
+import { insertSwiftCode } from "./middleware/insertSwiftCode.js";
 
 dotenv.config();
 
@@ -15,13 +15,10 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello, Dockerized TypeScript API!");
 });
 
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-// });
-
 app.post(
   "/v1/swift-codes",
   validatePostPayload,
+  insertSwiftCode,
   (req: Request, res: Response) => {
     res.send();
   }
@@ -30,3 +27,5 @@ app.post(
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+export { app };

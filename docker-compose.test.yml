@@ -10,7 +10,7 @@ services:
     env_file: ".env"  
     depends_on:
       - database
-    command: npm run test
+    command: /bin/sh -c "npm run test:unit && npm run test:integration"
 
   database:
     image: postgres:16

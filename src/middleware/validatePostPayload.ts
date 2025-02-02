@@ -23,21 +23,23 @@ export const validatePostPayload: RequestHandler = (req, res, next) => {
     swiftCode === undefined ||
     swiftCode === ""
   ) {
-    return res.status(400).json({ error: "Missing required fields" });
+    return res.status(400).json({ message: "Missing required fields" });
   }
 
   if (countryISO2.length != 2) {
     return res
       .status(400)
-      .json({ error: "Country ISO2 code must be 2 characters" });
+      .json({ message: "Country ISO2 code must be 2 characters" });
   }
 
   if (swiftCode.length != 11) {
-    return res.status(400).json({ error: "Swift code must be 11 characters" });
+    return res
+      .status(400)
+      .json({ message: "Swift code must be 11 characters" });
   }
 
   if (typeof req.body.isHeadquarter !== "boolean") {
-    return res.status(400).json({ error: "isHeadquarter must be a boolean" });
+    return res.status(400).json({ message: "isHeadquarter must be a boolean" });
   }
 
   const fieldsToTransform = [

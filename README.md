@@ -20,8 +20,8 @@ docker compose -f docker-compose.prod.yml build
 docker compose -f docker-compose.prod.yml up -d
 ```
 
-### Unit tests
+### Tests
 
 ```
-docker compose -f docker-compose.test.yml up --build
+./test.sh
 ```

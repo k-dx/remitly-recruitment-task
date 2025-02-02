@@ -63,7 +63,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Missing required fields",
+      message: "Missing required fields",
     });
   });
 
@@ -84,7 +84,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Missing required fields",
+      message: "Missing required fields",
     });
   });
 
@@ -105,7 +105,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Missing required fields",
+      message: "Missing required fields",
     });
   });
 
@@ -126,7 +126,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Missing required fields",
+      message: "Missing required fields",
     });
   });
 
@@ -147,7 +147,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Missing required fields",
+      message: "Missing required fields",
     });
   });
 
@@ -168,7 +168,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Missing required fields",
+      message: "Missing required fields",
     });
   });
 
@@ -190,7 +190,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Country ISO2 code must be 2 characters",
+      message: "Country ISO2 code must be 2 characters",
     });
   });
 
@@ -212,7 +212,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Country ISO2 code must be 2 characters",
+      message: "Country ISO2 code must be 2 characters",
     });
   });
 
@@ -278,7 +278,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Swift code must be 11 characters",
+      message: "Swift code must be 11 characters",
     });
   });
 
@@ -300,7 +300,7 @@ describe("validatePostPayload middleware", () => {
 
     expect(mockResponse.statusCode).to.equal(400);
     expect(mockResponse.json).to.deep.equal({
-      error: "Swift code must be 11 characters",
+      message: "Swift code must be 11 characters",
     });
   });
 });
