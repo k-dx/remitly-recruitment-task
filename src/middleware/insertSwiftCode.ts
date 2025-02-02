@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { pool } from "../db.js";
+import { logger } from "../logger.js";
 
 export const insertSwiftCode: RequestHandler = async (req, res, next) => {
   try {
@@ -37,7 +38,7 @@ export const insertSwiftCode: RequestHandler = async (req, res, next) => {
     res.status(201).json({ message: "Swift code inserted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
-    console.error(error);
+    logger.error({ err: error, req }, "Error inserting swift code");
   }
   next();
 };

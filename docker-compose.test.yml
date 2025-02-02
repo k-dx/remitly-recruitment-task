@@ -7,7 +7,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
-    env_file: ".env"  
+    env_file: ".env.test"  
     depends_on:
       - database
     command: /bin/sh -c "npm run test:unit && npm run test:integration"
