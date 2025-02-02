@@ -14,9 +14,6 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, Dockerized TypeScript API!");
-});
 app.get("/v1/swift-codes/:swiftCode", getBanksBySwiftCode);
 
 app.get("/v1/swift-codes/country/:countryISO2code", getBanksByCountryISO2);
@@ -24,6 +21,10 @@ app.get("/v1/swift-codes/country/:countryISO2code", getBanksByCountryISO2);
 app.post("/v1/swift-codes", validatePostPayload, insertSwiftCode);
 
 app.delete("/v1/swift-codes/:swiftCode", deleteSwiftCode);
+
+app.use((req: Request, res: Response) => {
+  res.status(404).json({ message: "Endpoint not found" });
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
