@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import { validatePostPayload } from "./middleware/validatePostPayload.js";
 import { insertSwiftCode } from "./middleware/insertSwiftCode.js";
+import { deleteSwiftCode } from "./middleware/deleteSwiftCode.js";
 
 dotenv.config();
 
@@ -15,14 +16,9 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello, Dockerized TypeScript API!");
 });
 
-app.post(
-  "/v1/swift-codes",
-  validatePostPayload,
-  insertSwiftCode,
-  (req: Request, res: Response) => {
-    res.send();
-  }
-);
+app.post("/v1/swift-codes", validatePostPayload, insertSwiftCode);
+
+app.delete("/v1/swift-codes/:swiftCode", deleteSwiftCode);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
