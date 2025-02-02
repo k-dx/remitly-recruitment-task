@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { validatePostPayload } from "./middleware/validatePostPayload.js";
 import { insertSwiftCode } from "./middleware/insertSwiftCode.js";
 import { deleteSwiftCode } from "./middleware/deleteSwiftCode.js";
+import { getBanksByCountryISO2 } from "./middleware/getBanksByCountryISO2.js";
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, Dockerized TypeScript API!");
 });
+
+app.get("/v1/swift-codes/country/:countryISO2code", getBanksByCountryISO2);
 
 app.post("/v1/swift-codes", validatePostPayload, insertSwiftCode);
 

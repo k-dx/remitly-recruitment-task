@@ -1,0 +1,53 @@
+import { RequestHandler } from "express";
+import { pool } from "../db.js";
+import { logger } from "../logger.js";
+import { QueryResult } from "pg";
+
+export const getBanksByCountryISO2: RequestHandler = async (req, res, next) => {
+  try {
+    const countryISO2 = req.params.countryISO2code;
+
+    const countryQuery =
+      "SELECT country_iso2, country_name FROM countries_iso2 WHERE country_iso2 = $1";
+    const countryValues = [countryISO2];
+
+    const countryResult: QueryResult<{
+      country_iso2: string;
+      country_name: string;
+    }> = await pool.query(countryQuery, countryValues);
+
+    if (countryResult.rowCount === 0) {
+      res.status(404).json({ message: "Country not found" });
+      return;
+    }
+
+    const swiftCodesQuery =
+      "SELECT address, bank_name, country_iso2, swift_code FROM swift_codes WHERE country_iso2 = $1";
+    const swiftCodesValues = [countryISO2];
+
+    const swiftCodesResult: QueryResult<{
+      address: string;
+      bank_name: string;
+      country_iso2: string;
+      swift_code: string;
+    }> = await pool.query(swiftCodesQuery, swiftCodesValues);
+
+    const response = {
+      countryISO2: countryResult.rows[0].country_iso2,
+      countryName: countryResult.rows[0].country_name,
+      swiftCodes: swiftCodesResult.rows.map((row) => ({
+        address: row.address,
+        bankName: row.bank_name,
+        countryISO2: row.country_iso2,
+        isHeadquarter: row.swift_code.endsWith("XXX"),
+        swiftCode: row.swift_code,
+      })),
+    };
+
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+    logger.error({ err: error, req }, "Error fetching swift codes");
+  }
+  next();
+};
