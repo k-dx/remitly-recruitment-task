@@ -30,10 +30,8 @@ export const insertSwiftCode: RequestHandler = async (req, res, next) => {
       req.body.swiftCode,
     ];
 
-    await Promise.all([
-      pool.query(countryQuery, countryValues),
-      pool.query(swiftQuery, swiftValues),
-    ]);
+    await pool.query(countryQuery, countryValues);
+    await pool.query(swiftQuery, swiftValues);
 
     res.status(201).json({ message: "Swift code inserted successfully" });
   } catch (error) {

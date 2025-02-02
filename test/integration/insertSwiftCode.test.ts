@@ -69,6 +69,10 @@ describe("POST /v1/swift-codes", () => {
 
     // Insert the SWIFT code first
     await pool.query(
+      "INSERT INTO countries_iso2 (country_iso2, country_name) VALUES ($1, $2)",
+      [payload.countryISO2, payload.countryName]
+    );
+    await pool.query(
       "INSERT INTO swift_codes (address, bank_name, country_iso2, swift_code) VALUES ($1, $2, $3, $4)",
       [
         payload.address,
