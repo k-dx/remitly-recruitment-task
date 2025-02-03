@@ -15,13 +15,17 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get(`/v1/swift-codes/:${swiftCode}`, getBanksBySwiftCode);
+const router = express.Router();
 
-app.get(`/v1/swift-codes/country/:${countryISO2code}`, getBanksByCountryISO2);
+router.get(`/:${swiftCode}`, getBanksBySwiftCode);
 
-app.post("/v1/swift-codes", validatePostPayload, insertSwiftCode);
+router.get(`/country/:${countryISO2code}`, getBanksByCountryISO2);
 
-app.delete(`/v1/swift-codes/:${swiftCode}`, deleteSwiftCode);
+router.post("/", validatePostPayload, insertSwiftCode);
+
+router.delete(`/:${swiftCode}`, deleteSwiftCode);
+
+app.use("/v1/swift-codes", router);
 
 app.use((req: Request, res: Response<MessageResponse>) => {
   res.status(404).json({ message: "Endpoint not found" });
