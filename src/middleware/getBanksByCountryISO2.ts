@@ -1,9 +1,25 @@
-import { RequestHandler } from "express";
 import { pool } from "../db.js";
 import { logger } from "../logger.js";
 import { QueryResult } from "pg";
+import { RequestHandler } from "express";
+import { MessageResponse, CountryISO2CodeParams } from "../types/types.js";
 
-export const getBanksByCountryISO2: RequestHandler = async (req, res, next) => {
+type BankResponse = {
+  countryISO2: string;
+  countryName: string;
+  swiftCodes: {
+    address: string;
+    bankName: string;
+    countryISO2: string;
+    isHeadquarter: boolean;
+    swiftCode: string;
+  }[];
+};
+
+export const getBanksByCountryISO2: RequestHandler<
+  CountryISO2CodeParams,
+  BankResponse | MessageResponse
+> = async (req, res, next) => {
   try {
     const countryISO2 = req.params.countryISO2code;
 

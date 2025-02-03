@@ -1,9 +1,29 @@
-import { RequestHandler } from "express";
 import { pool } from "../db.js";
 import { logger } from "../logger.js";
 import { QueryResult } from "pg";
+import { RequestHandler } from "express";
+import { MessageResponse, SwiftCodeParams } from "../types/types.js";
 
-export const getBanksBySwiftCode: RequestHandler = async (req, res, next) => {
+type BankResponse = {
+  address: string;
+  bankName: string;
+  countryISO2: string;
+  countryName: string;
+  isHeadquarter: boolean;
+  swiftCode: string;
+  branches?: {
+    address: string;
+    bankName: string;
+    countryISO2: string;
+    isHeadquarter: boolean;
+    swiftCode: string;
+  }[];
+};
+
+export const getBanksBySwiftCode: RequestHandler<
+  SwiftCodeParams,
+  BankResponse | MessageResponse
+> = async (req, res, next) => {
   try {
     const swiftCode = req.params.swiftCode;
 
@@ -66,7 +86,7 @@ export const getBanksBySwiftCode: RequestHandler = async (req, res, next) => {
         swift_code: string;
       }> = await pool.query(branchesQuery, branchesValues);
 
-      const response = {
+      const response: BankResponse = {
         address: bank.address,
         bankName: bank.bank_name,
         countryISO2: bank.country_iso2,

@@ -1,6 +1,11 @@
 import { RequestHandler } from "express";
+import { MessageResponse } from "../types/types.js";
 
-export const validatePostPayload: RequestHandler = (req, res, next) => {
+export const validatePostPayload: RequestHandler<{}, MessageResponse> = (
+  req,
+  res,
+  next
+) => {
   const {
     address,
     bankName,

@@ -1,8 +1,13 @@
 import { RequestHandler } from "express";
 import { pool } from "../db.js";
 import { logger } from "../logger.js";
+import { MessageResponse } from "../types/types.js";
 
-export const insertSwiftCode: RequestHandler = async (req, res, next) => {
+export const insertSwiftCode: RequestHandler<{}, MessageResponse> = async (
+  req,
+  res,
+  next
+) => {
   try {
     const checkSwiftCodeQuery =
       "SELECT 1 FROM swift_codes WHERE swift_code = $1";

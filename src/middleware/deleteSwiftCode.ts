@@ -1,9 +1,13 @@
-import { RequestHandler } from "express";
 import { pool } from "../db.js";
 import { logger } from "../logger.js";
 import { QueryResult } from "pg";
+import { RequestHandler } from "express";
+import { MessageResponse, SwiftCodeParams } from "../types/types.js";
 
-export const deleteSwiftCode: RequestHandler = async (req, res, next) => {
+export const deleteSwiftCode: RequestHandler<
+  SwiftCodeParams,
+  MessageResponse
+> = async (req, res, next) => {
   try {
     const swiftCode = req.params.swiftCode;
 
