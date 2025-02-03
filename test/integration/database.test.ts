@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { pool } from "../../src/db.js";
+import { pool } from "@/db.js";
 
 describe("countries_iso2 table", () => {
   beforeEach(async () => {

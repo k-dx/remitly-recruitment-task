@@ -2,7 +2,7 @@ import { pool } from "../db.js";
 import { logger } from "../logger.js";
 import { QueryResult } from "pg";
 import { RequestHandler } from "express";
-import { MessageResponse, CountryISO2CodeParams } from "../types/types.js";
+import { MessageResponse, CountryISO2CodeParams } from "@types_/types.js";
 
 type BankResponse = {
   countryISO2: string;

@@ -2,7 +2,7 @@ import { pool } from "../db.js";
 import { logger } from "../logger.js";
 import { QueryResult } from "pg";
 import { RequestHandler } from "express";
-import { MessageResponse, SwiftCodeParams } from "../types/types.js";
+import { MessageResponse, SwiftCodeParams } from "@types_/types.js";
 
 type BankResponse = {
   address: string;

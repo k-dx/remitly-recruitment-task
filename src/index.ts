@@ -1,12 +1,12 @@
 import express from "express";
 import { Request, Response } from "express";
 import dotenv from "dotenv";
-import { validatePostPayload } from "./middleware/validatePostPayload.js";
-import { insertSwiftCode } from "./middleware/insertSwiftCode.js";
-import { deleteSwiftCode } from "./middleware/deleteSwiftCode.js";
-import { getBanksByCountryISO2 } from "./middleware/getBanksByCountryISO2.js";
-import { getBanksBySwiftCode } from "./middleware/getBanksBySwiftCode.js";
-import { countryISO2code, MessageResponse, swiftCode } from "./types/types.js";
+import { validatePostPayload } from "@middleware/validatePostPayload.js";
+import { insertSwiftCode } from "@middleware/insertSwiftCode.js";
+import { deleteSwiftCode } from "@middleware/deleteSwiftCode.js";
+import { getBanksByCountryISO2 } from "@middleware/getBanksByCountryISO2.js";
+import { getBanksBySwiftCode } from "@middleware/getBanksBySwiftCode.js";
+import { countryISO2code, MessageResponse, swiftCode } from "@types_/types.js";
 
 dotenv.config();
 

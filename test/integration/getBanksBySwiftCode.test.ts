@@ -1,7 +1,7 @@
 import request from "supertest";
-import { app } from "../../src/index.js";
+import { app } from "@/index.js";
 import { expect } from "chai";
-import { pool } from "../../src/db.js";
+import { pool } from "@/db.js";
 
 describe("GET /v1/swift-codes/:swiftCode", () => {
   before(async () => {

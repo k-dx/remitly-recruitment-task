@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import request from "supertest";
-import { app } from "../../src/index.js";
+import { app } from "@/index.js";
 
 describe("non-existent endpoint", () => {
   it("should return a proper message for GET method", async () => {

@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Request, Response, NextFunction } from "express";
-import { validatePostPayload } from "../../src/middleware/validatePostPayload.js";
+import { validatePostPayload } from "@middleware/validatePostPayload.js";
 
 describe("validatePostPayload middleware", () => {
   let mockRequest: Partial<Request>;

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import request from "supertest";
-import { app } from "../../src/index.js";
-import { pool } from "../../src/db.js";
+import { app } from "@/index.js";
+import { pool } from "@/db.js";
 
 describe("DELETE /v1/swift-codes/:swiftCode", () => {
   beforeEach(async () => {
