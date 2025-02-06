@@ -3,7 +3,9 @@ import request from "supertest";
 import { app } from "@/index.js";
 import { pool } from "@/db.js";
 
-describe("GET /v1/swift-codes/:countryISO2", () => {
+const endpoint = "/v1/swift-codes/country";
+
+describe(`GET ${endpoint}/:countryISO2`, () => {
   beforeEach(async () => {
     await pool.query("DELETE FROM swift_codes");
     await pool.query("DELETE FROM countries_iso2");
@@ -28,9 +30,7 @@ describe("GET /v1/swift-codes/:countryISO2", () => {
       ["456 MAIN ST", "SECOND BANK", "US", "TESTUS44YYY"]
     );
 
-    const res = await request(app)
-      .get("/v1/swift-codes/country/US")
-      .expect(200);
+    const res = await request(app).get(`${endpoint}/US`).expect(200);
 
     expect(res.body).to.have.property("countryISO2", "US");
     expect(res.body).to.have.property("countryName", "UNITED STATES");
@@ -47,9 +47,7 @@ describe("GET /v1/swift-codes/:countryISO2", () => {
   });
 
   it("should return 404 if country is not found", async () => {
-    const res = await request(app)
-      .get("/v1/swift-codes/country/XX")
-      .expect(404);
+    const res = await request(app).get(`${endpoint}/XX`).expect(404);
 
     expect(res.body).to.have.property("message", "Country not found");
   });

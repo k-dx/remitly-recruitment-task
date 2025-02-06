@@ -3,7 +3,9 @@ import request from "supertest";
 import { app } from "@/index.js";
 import { pool } from "@/db.js";
 
-describe("DELETE /v1/swift-codes/:swiftCode", () => {
+const endpoint = "/v1/swift-codes";
+
+describe(`DELETE ${endpoint}/:swiftCode`, () => {
   beforeEach(async () => {
     await pool.query("DELETE FROM swift_codes");
     await pool.query("DELETE FROM countries_iso2");
@@ -27,7 +29,7 @@ describe("DELETE /v1/swift-codes/:swiftCode", () => {
 
     // Delete the inserted swift code
     const res = await request(app)
-      .delete("/v1/swift-codes/TESTUS33XXX")
+      .delete(`${endpoint}/TESTUS33XXX`)
       .expect(200);
 
     expect(res.body.message).to.equal("Swift code deleted successfully");
@@ -65,7 +67,7 @@ describe("DELETE /v1/swift-codes/:swiftCode", () => {
 
     // Delete one swift code
     const res = await request(app)
-      .delete("/v1/swift-codes/TESTUS33XXX")
+      .delete(`${endpoint}/TESTUS33XXX`)
       .expect(200);
 
     expect(res.body.message).to.equal("Swift code deleted successfully");
@@ -87,7 +89,7 @@ describe("DELETE /v1/swift-codes/:swiftCode", () => {
 
   it("should return 404 when the swift code does not exist", async () => {
     const res = await request(app)
-      .delete("/v1/swift-codes/NONEXISTENT")
+      .delete(`${endpoint}/NONEXISTENT`)
       .expect(404);
     expect(res.body.message).to.equal("Swift code not found");
   });
