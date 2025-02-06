@@ -12,8 +12,6 @@ RUN npm install
 # Copy source code
 COPY src ./src/
 COPY init-db ./init-db/
-COPY .mocharc.json ./
-COPY .env.prod ./
 COPY tsconfig.json ./
 
 # Build TypeScript code

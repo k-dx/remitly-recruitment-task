@@ -10,9 +10,9 @@ RUN npm install
 
 # Copy source code and config files
 COPY src ./src/
+COPY test ./test/
 COPY init-db ./init-db/
 COPY .mocharc.json ./
-COPY .env.prod ./
 COPY tsconfig.json ./
 
 # Expose the port for the API

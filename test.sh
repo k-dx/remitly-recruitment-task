@@ -13,4 +13,4 @@ if [ "$(docker volume ls -q -f name=remitly_postgres-data)" ]; then
 fi
 
 # Run the tests
-docker compose -f docker-compose.test.yml up --no-attach database
+docker compose -f docker-compose.test.yml up --build --no-attach database
