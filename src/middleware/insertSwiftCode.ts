@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import { pool } from "../db.js";
 import { logger } from "../logger.js";
-import { MessageResponse } from "@types_/types.js";
+import { MessageResponse } from "../types/types.js";
 
 export const insertSwiftCode: RequestHandler<{}, MessageResponse> = async (
   req,

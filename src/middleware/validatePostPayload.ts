@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { MessageResponse } from "@types_/types.js";
+import { MessageResponse } from "../types/types.js";
 
 export const validatePostPayload: RequestHandler<{}, MessageResponse> = (
   req,
