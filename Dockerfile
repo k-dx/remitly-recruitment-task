@@ -8,11 +8,12 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy source code
-COPY . .
-
-# Build TypeScript code
-RUN npm run build
+# Copy source code and config files
+COPY src ./src/
+COPY init-db ./init-db/
+COPY .mocharc.json ./
+COPY .env.prod ./
+COPY tsconfig.json ./
 
 # Expose the port for the API
 EXPOSE 3000

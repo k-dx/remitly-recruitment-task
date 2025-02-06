@@ -10,7 +10,11 @@ COPY package*.json ./
 RUN npm install
 
 # Copy source code
-COPY . .
+COPY src ./src/
+COPY init-db ./init-db/
+COPY .mocharc.json ./
+COPY .env.prod ./
+COPY tsconfig.json ./
 
 # Build TypeScript code
 RUN npm run build

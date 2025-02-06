@@ -2,6 +2,7 @@ services:
   api:
     tty: true
     container_name: remitly-api-prod-1
+    image: api-prod
     build:
       context: .
       dockerfile: Dockerfile.prod
