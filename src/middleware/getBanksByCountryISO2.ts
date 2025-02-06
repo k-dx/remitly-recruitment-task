@@ -33,8 +33,7 @@ export const getBanksByCountryISO2: RequestHandler<
     }> = await pool.query(countryQuery, countryValues);
 
     if (countryResult.rowCount === 0) {
-      res.status(404).json({ message: "Country not found" });
-      return;
+      return res.status(404).json({ message: "Country not found" });
     }
 
     const swiftCodesQuery =
@@ -60,10 +59,9 @@ export const getBanksByCountryISO2: RequestHandler<
       })),
     };
 
-    res.status(200).json(response);
+    return res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
     logger.error({ err: error, req }, "Error fetching swift codes");
+    return res.status(500).json({ message: "Internal server error" });
   }
-  next();
 };

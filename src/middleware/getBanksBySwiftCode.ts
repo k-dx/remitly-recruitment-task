@@ -54,8 +54,7 @@ export const getBanksBySwiftCode: RequestHandler<
     }> = await pool.query(swiftCodeQuery, swiftCodeValues);
 
     if (swiftCodeResult.rowCount === 0) {
-      res.status(404).json({ message: "SWIFT code not found" });
-      return;
+      return res.status(404).json({ message: "SWIFT code not found" });
     }
 
     const bank = swiftCodeResult.rows[0];
@@ -101,7 +100,7 @@ export const getBanksBySwiftCode: RequestHandler<
           swiftCode: row.swift_code,
         })),
       };
-      res.status(200).json(response);
+      return res.status(200).json(response);
     } else {
       const response = {
         address: bank.address,
@@ -111,11 +110,10 @@ export const getBanksBySwiftCode: RequestHandler<
         isHeadquarter: false,
         swiftCode: bank.swift_code,
       };
-      res.status(200).json(response);
+      return res.status(200).json(response);
     }
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
     logger.error({ err: error, req }, "Error fetching swift codes");
+    return res.status(500).json({ message: "Internal server error" });
   }
-  next();
 };

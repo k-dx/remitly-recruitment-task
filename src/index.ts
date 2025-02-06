@@ -28,7 +28,7 @@ router.delete(`/:${swiftCode}`, deleteSwiftCode);
 app.use("/v1/swift-codes", router);
 
 app.use((req: Request, res: Response<MessageResponse>) => {
-  res.status(404).json({ message: "Endpoint not found" });
+  return res.status(404).json({ message: "Endpoint not found" });
 });
 
 app.listen(port, () => {

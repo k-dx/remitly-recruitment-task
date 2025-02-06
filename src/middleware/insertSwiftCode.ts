@@ -38,10 +38,11 @@ export const insertSwiftCode: RequestHandler<{}, MessageResponse> = async (
     await pool.query(countryQuery, countryValues);
     await pool.query(swiftQuery, swiftValues);
 
-    res.status(201).json({ message: "Swift code inserted successfully" });
+    return res
+      .status(201)
+      .json({ message: "Swift code inserted successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
     logger.error({ err: error, req }, "Error inserting swift code");
+    return res.status(500).json({ message: "Internal server error" });
   }
-  next();
 };

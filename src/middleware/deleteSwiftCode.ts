@@ -21,8 +21,7 @@ export const deleteSwiftCode: RequestHandler<
     );
 
     if (result.rowCount === 0) {
-      res.status(404).json({ message: "Swift code not found" });
-      return;
+      return res.status(404).json({ message: "Swift code not found" });
     }
 
     const countryISO2 = result.rows[0].country_iso2;
@@ -44,10 +43,9 @@ export const deleteSwiftCode: RequestHandler<
       await pool.query(deleteCountryQuery, deleteCountryValues);
     }
 
-    res.status(200).json({ message: "Swift code deleted successfully" });
+    return res.status(200).json({ message: "Swift code deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
     logger.error({ err: error, req }, "Error deleting swift code");
+    return res.status(500).json({ message: "Internal server error" });
   }
-  next();
 };
