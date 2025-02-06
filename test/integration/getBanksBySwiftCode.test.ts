@@ -3,7 +3,9 @@ import { app } from "@/index.js";
 import { expect } from "chai";
 import { pool } from "@/db.js";
 
-describe("GET /v1/swift-codes/:swiftCode", () => {
+const endpoint = "/v1/swift-codes";
+
+describe(`GET ${endpoint}/:swiftCode`, () => {
   before(async () => {
     await pool.query("DELETE FROM swift_codes");
     await pool.query("DELETE FROM countries_iso2");
@@ -34,10 +36,15 @@ describe("GET /v1/swift-codes/:swiftCode", () => {
     );
   });
 
+  after(async () => {
+    await pool.query("DELETE FROM swift_codes");
+    await pool.query("DELETE FROM countries_iso2");
+  });
+
   it("should retrieve details of a headquarter SWIFT code", async () => {
     const swiftCode = "TESTUS33XXX";
     const response = await request(app)
-      .get(`/v1/swift-codes/${swiftCode}`)
+      .get(`${endpoint}/${swiftCode}`)
       .expect(200);
 
     expect(response.body).to.have.property("address");
@@ -49,14 +56,20 @@ describe("GET /v1/swift-codes/:swiftCode", () => {
     expect(response.body).to.have.property("branches");
     expect(response.body.branches).to.be.an("array");
     expect(response.body.branches.length).to.be.greaterThan(0);
-    expect(response.body.branches.some((b: any) => b.swiftCode === swiftCode))
+
+    const branchesAreNotHeadquarters = response.body.branches.every(
+      (b: any) => b.isHeadquarter === false
+    );
+    expect(branchesAreNotHeadquarters).to.be.true;
+
+    expect(response.body.branches.every((b: any) => b.swiftCode !== swiftCode))
       .to.be.true;
   });
 
   it("should retrieve details of a branch SWIFT code", async () => {
     const swiftCode = "TESTUS33POL";
     const response = await request(app)
-      .get(`/v1/swift-codes/${swiftCode}`)
+      .get(`${endpoint}/${swiftCode}`)
       .expect(200);
 
     expect(response.body).to.have.property("address");
@@ -70,6 +83,6 @@ describe("GET /v1/swift-codes/:swiftCode", () => {
 
   it("should return 404 for a non-existent SWIFT code", async () => {
     const swiftCode = "NONEXISTENT";
-    await request(app).get(`/v1/swift-codes/${swiftCode}`).expect(404);
+    await request(app).get(`${endpoint}/${swiftCode}`).expect(404);
   });
 });

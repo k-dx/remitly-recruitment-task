@@ -75,7 +75,7 @@ export const getBanksBySwiftCode: RequestHandler<
       countries_iso2 ci 
       ON 
       sc.country_iso2 = ci.country_iso2 
-      WHERE swift_code LIKE $1`;
+      WHERE swift_code LIKE $1 AND swift_code NOT LIKE '%XXX'`;
       const branchesValues = [bank.swift_code.slice(0, 8) + "%"];
 
       const branchesResult: QueryResult<{
