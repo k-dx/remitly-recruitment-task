@@ -6,6 +6,8 @@
     "build": "tsc",
     "start": "node dist/src/index.js",
     "dev": "tsx watch src",
+    "import": "node dist/src/importExec.js",
+    "import:test": "tsx src/importExec.ts",
     "test2": "mocha --recursive --require ts-node/register test/**/*.ts",
     "test:unit": "mocha test/unit/**/*.ts",
     "test:integration": "mocha test/integration/**/*.ts"
@@ -16,6 +18,7 @@
   "description": "",
   "type": "module",
   "dependencies": {
+    "csv-parser": "^3.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "pg": "^8.13.1",

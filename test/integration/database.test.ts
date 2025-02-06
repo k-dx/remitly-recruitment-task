@@ -3,10 +3,12 @@ import { pool } from "@/db.js";
 
 describe("countries_iso2 table", () => {
   beforeEach(async () => {
+    await pool.query("DELETE FROM swift_codes");
     await pool.query("DELETE FROM countries_iso2");
   });
 
   after(async () => {
+    await pool.query("DELETE FROM swift_codes");
     await pool.query("DELETE FROM countries_iso2");
   });
 
