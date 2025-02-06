@@ -61,7 +61,7 @@ describe("countries_iso2 table", () => {
   });
 });
 
-describe("countries_iso2 table", () => {
+describe("swift_codes table", () => {
   beforeEach(async () => {
     await pool.query("DELETE FROM swift_codes");
     await pool.query("DELETE FROM countries_iso2");
