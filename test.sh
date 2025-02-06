@@ -2,10 +2,10 @@
 
 # Delete the containers and the database
 if [ "$(docker ps -a -q -f name=remitly-api-1)" ]; then
-    docker rm remitly-api-1
+    docker rm -f remitly-api-1
 fi
 if [ "$(docker ps -a -q -f name=remitly-database-1)" ]; then
-    docker rm remitly-database-1
+    docker rm -f remitly-database-1
 fi
 
 if [ "$(docker volume ls -q -f name=remitly_postgres-data)" ]; then

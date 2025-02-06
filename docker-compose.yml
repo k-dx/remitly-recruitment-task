@@ -1,5 +1,6 @@
 services:
   api:
+    tty: true
     container_name: remitly-api-1
     build:
       context: .
