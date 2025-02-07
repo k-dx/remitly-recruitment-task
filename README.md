@@ -14,6 +14,8 @@ Other remarks:
 
 ## How to run
 
+The database container for production is separate from the database shared between development and test.
+
 ### Development
 
 ```
