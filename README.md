@@ -41,7 +41,7 @@ docker compose -f docker-compose.prod.yml up -d
    docker exec -it remitly-api-prod-1 npm run import
    ```
 > [!WARNING]
-> Importing the TSV clears the already existing data (to avoid collisions).
+> Importing the TSV clears the already existing data.
 
 ### Tests
 
