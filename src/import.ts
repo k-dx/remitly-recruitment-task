@@ -145,8 +145,6 @@ async function importTsv(inputFileName: string = "input.tsv") {
 
     await insertCountries(preprocessed.countries);
     await insertBanks(preprocessed.banks);
-
-    console.log("TSV import completed.");
   } catch (err) {
     console.error(`Error importing TSV ${err}`);
   }
